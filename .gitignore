@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+.pubspec/
+build/
+.dart_tool/
+
+# Compiled output
+dist/
+*.tsbuildinfo
+
+# Secrets and local environment. `.env.example` is intentionally NOT
+# ignored: it holds placeholders and is meant to be committed so others can
+# see which variables exist. Every other env file is local-only.
+.env
+.env.*
+!.env.example
+
+# Credentials that must never reach version control, whatever their name
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+credentials.json
+service-account*.json
+secrets.*
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+logs/
+
+# Test and coverage output
+coverage/
+.nyc_output/
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+
+# Local database dumps
+*.sql
+*.dump
+pgdata/
