@@ -1,15 +1,10 @@
 #!/usr/bin/env node
-/**
- * Cross-platform test entry point.
- *
- * Node's built-in test runner only auto-discovers `.js`/`.mjs`/`.cjs`, and
- * glob patterns in the positional arguments landed in Node 21. Rather than
- * pin an engine range, this script walks `tests/` itself and hands the
- * explicit file list to `node --import tsx --test`, which works on Node 18+.
- */
-const { spawnSync } = require('node:child_process');
-const { readdirSync } = require('node:fs');
-const { join, relative, sep } = require('node:path');
+import { spawnSync } from 'node:child_process';
+import { readdirSync } from 'node:fs';
+import { join, relative, sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const ROOT = join(__dirname, '..');
 const TESTS_DIR = join(ROOT, 'tests');
@@ -26,7 +21,7 @@ const collect = (dir) => {
     const full = join(dir, entry.name);
     if (entry.isDirectory()) {
       found.push(...collect(full));
-    } else if (entry.isFile() && entry.name.endsWith('.test.ts')) {
+    } else if (entry.isFile() && entry.name.endsWith('.test.js')) {
       found.push(full);
     }
   }
@@ -52,13 +47,6 @@ if (selected.length === 0) {
 
 console.log(`Running ${selected.length} test file(s) with Node ${process.version}\n`);
 
-/**
- * `shared/config/env.ts` refuses to load without its required variables, and
- * importing anything that reaches the Prisma client pulls it in. Supplying
- * throwaway values here keeps the suite hermetic and keeps the real secrets
- * out of the repository: nothing here connects to a database, and the suite
- * asserts against plain objects and pure functions only.
- */
 const TEST_ENV = {
   NODE_ENV: 'test',
   DATABASE_URL: 'postgresql://test:test@localhost:5432/inventory_test?schema=public',
@@ -73,7 +61,7 @@ for (const [key, value] of Object.entries(TEST_ENV)) {
 
 const result = spawnSync(
   process.execPath,
-  ['--import', 'tsx', '--test', '--test-reporter=spec', ...selected.map((f) => f.split(sep).join('/'))],
+  ['--test', '--test-reporter=spec', ...selected.map((f) => f.split(sep).join('/'))],
   { stdio: 'inherit', cwd: ROOT, env },
 );
 
