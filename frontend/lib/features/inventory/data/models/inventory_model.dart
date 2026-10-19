@@ -42,7 +42,7 @@ enum TransactionStatus {
 }
 
 @freezed
-class Warehouse with _$Warehouse {
+abstract class Warehouse with _$Warehouse {
   const factory Warehouse({
     required String id,
     required String name,
@@ -62,7 +62,7 @@ class Warehouse with _$Warehouse {
 }
 
 @freezed
-class Inventory with _$Inventory {
+abstract class Inventory with _$Inventory {
   const factory Inventory({
     required String id,
     required String productId,
@@ -82,7 +82,7 @@ class Inventory with _$Inventory {
 }
 
 @freezed
-class InventoryTransaction with _$InventoryTransaction {
+abstract class InventoryTransaction with _$InventoryTransaction {
   const factory InventoryTransaction({
     required String id,
     required String productId,
@@ -109,7 +109,7 @@ class InventoryTransaction with _$InventoryTransaction {
 }
 
 @freezed
-class CreateTransactionRequest with _$CreateTransactionRequest {
+abstract class CreateTransactionRequest with _$CreateTransactionRequest {
   const factory CreateTransactionRequest({
     required String productId,
     required String warehouseId,
@@ -125,7 +125,7 @@ class CreateTransactionRequest with _$CreateTransactionRequest {
 }
 
 @freezed
-class StockAdjustment with _$StockAdjustment {
+abstract class StockAdjustment with _$StockAdjustment {
   const factory StockAdjustment({
     required String id,
     required String productId,
@@ -145,7 +145,7 @@ class StockAdjustment with _$StockAdjustment {
 }
 
 @freezed
-class CreateAdjustmentRequest with _$CreateAdjustmentRequest {
+abstract class CreateAdjustmentRequest with _$CreateAdjustmentRequest {
   const factory CreateAdjustmentRequest({
     required String productId,
     required String warehouseId,
@@ -157,7 +157,7 @@ class CreateAdjustmentRequest with _$CreateAdjustmentRequest {
 }
 
 @freezed
-class StockTransfer with _$StockTransfer {
+abstract class StockTransfer with _$StockTransfer {
   const factory StockTransfer({
     required String id,
     required String productId,
@@ -178,7 +178,7 @@ class StockTransfer with _$StockTransfer {
 }
 
 @freezed
-class CreateTransferRequest with _$CreateTransferRequest {
+abstract class CreateTransferRequest with _$CreateTransferRequest {
   const factory CreateTransferRequest({
     required String productId,
     required String fromWarehouseId,
@@ -192,7 +192,7 @@ class CreateTransferRequest with _$CreateTransferRequest {
 }
 
 @freezed
-class InventorySummary with _$InventorySummary {
+abstract class InventorySummary with _$InventorySummary {
   const factory InventorySummary({
     required double totalProducts,
     required double totalStockQuantity,
@@ -207,7 +207,7 @@ class InventorySummary with _$InventorySummary {
 }
 
 @freezed
-class WarehouseSummary with _$WarehouseSummary {
+abstract class WarehouseSummary with _$WarehouseSummary {
   const factory WarehouseSummary({
     required String warehouseId,
     required String warehouseName,
@@ -234,3 +234,4 @@ class TransactionStatusConverter extends EnumStringConverter<TransactionStatus> 
   @override
   TransactionStatus get fallback => TransactionStatus.pending;
 }
+

@@ -1,7 +1,6 @@
 import 'package:riverpod/riverpod.dart';
 import 'package:inventory_app/core/usecase/usecase.dart';
 import 'package:inventory_app/features/audit/data/models/audit_model.dart';
-import 'package:inventory_app/features/audit/data/repositories/audit_repository.dart';
 import 'package:inventory_app/presentation/providers/network_provider.dart';
 
 /// Repository providers are owned centrally by [network_provider.dart]. This

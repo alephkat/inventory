@@ -26,7 +26,7 @@ enum OrderStatus {
 }
 
 @freezed
-class Customer with _$Customer {
+abstract class Customer with _$Customer {
   const factory Customer({
     required String id,
     required String name,
@@ -48,7 +48,7 @@ class Customer with _$Customer {
 }
 
 @freezed
-class OrderItem with _$OrderItem {
+abstract class OrderItem with _$OrderItem {
   const factory OrderItem({
     required String id,
     required String productId,
@@ -66,7 +66,7 @@ class OrderItem with _$OrderItem {
 }
 
 @freezed
-class PurchaseOrder with _$PurchaseOrder {
+abstract class PurchaseOrder with _$PurchaseOrder {
   const factory PurchaseOrder({
     required String id,
     required String orderNumber,
@@ -92,7 +92,7 @@ class PurchaseOrder with _$PurchaseOrder {
 }
 
 @freezed
-class SalesOrder with _$SalesOrder {
+abstract class SalesOrder with _$SalesOrder {
   const factory SalesOrder({
     required String id,
     required String orderNumber,
@@ -117,7 +117,7 @@ class SalesOrder with _$SalesOrder {
 }
 
 @freezed
-class CreatePurchaseOrderRequest with _$CreatePurchaseOrderRequest {
+abstract class CreatePurchaseOrderRequest with _$CreatePurchaseOrderRequest {
   const factory CreatePurchaseOrderRequest({
     required String supplierId,
     required String warehouseId,
@@ -131,7 +131,7 @@ class CreatePurchaseOrderRequest with _$CreatePurchaseOrderRequest {
 }
 
 @freezed
-class CreateSalesOrderRequest with _$CreateSalesOrderRequest {
+abstract class CreateSalesOrderRequest with _$CreateSalesOrderRequest {
   const factory CreateSalesOrderRequest({
     required String customerId,
     required String warehouseId,
@@ -145,7 +145,7 @@ class CreateSalesOrderRequest with _$CreateSalesOrderRequest {
 }
 
 @freezed
-class CreateOrderItemRequest with _$CreateOrderItemRequest {
+abstract class CreateOrderItemRequest with _$CreateOrderItemRequest {
   const factory CreateOrderItemRequest({
     required String productId,
     required double quantity,
@@ -157,7 +157,7 @@ class CreateOrderItemRequest with _$CreateOrderItemRequest {
 }
 
 @freezed
-class OrderListResponse with _$OrderListResponse {
+abstract class OrderListResponse with _$OrderListResponse {
   const factory OrderListResponse({
     required List<dynamic> items,
     required int total,
@@ -177,3 +177,4 @@ class OrderStatusConverter extends EnumStringConverter<OrderStatus> {
   @override
   OrderStatus get fallback => OrderStatus.draft;
 }
+

@@ -22,7 +22,7 @@ enum IssuingStatus {
 }
 
 @freezed
-class IssuingLine with _$IssuingLine {
+abstract class IssuingLine with _$IssuingLine {
   const factory IssuingLine({
     required String id,
     required String productId,
@@ -44,7 +44,7 @@ class IssuingLine with _$IssuingLine {
 }
 
 @freezed
-class StockIssuing with _$StockIssuing {
+abstract class StockIssuing with _$StockIssuing {
   const factory StockIssuing({
     required String id,
     required String issuingNumber,
@@ -75,7 +75,7 @@ class StockIssuing with _$StockIssuing {
 }
 
 @freezed
-class CreateIssuingRequest with _$CreateIssuingRequest {
+abstract class CreateIssuingRequest with _$CreateIssuingRequest {
   const factory CreateIssuingRequest({
     required String requesterId,
     required String departmentId,
@@ -90,7 +90,7 @@ class CreateIssuingRequest with _$CreateIssuingRequest {
 }
 
 @freezed
-class CreateIssuingLineRequest with _$CreateIssuingLineRequest {
+abstract class CreateIssuingLineRequest with _$CreateIssuingLineRequest {
   const factory CreateIssuingLineRequest({
     required String productId,
     required double requestedQuantity,
@@ -104,7 +104,7 @@ class CreateIssuingLineRequest with _$CreateIssuingLineRequest {
 }
 
 @freezed
-class ApproveIssuingRequest with _$ApproveIssuingRequest {
+abstract class ApproveIssuingRequest with _$ApproveIssuingRequest {
   const factory ApproveIssuingRequest({
     required String issuingId,
     String? notes,
@@ -114,7 +114,7 @@ class ApproveIssuingRequest with _$ApproveIssuingRequest {
 }
 
 @freezed
-class IssueStockRequest with _$IssueStockRequest {
+abstract class IssueStockRequest with _$IssueStockRequest {
   const factory IssueStockRequest({
     required String issuingId,
     required List<IssueStockLineRequest> lines,
@@ -125,7 +125,7 @@ class IssueStockRequest with _$IssueStockRequest {
 }
 
 @freezed
-class IssueStockLineRequest with _$IssueStockLineRequest {
+abstract class IssueStockLineRequest with _$IssueStockLineRequest {
   const factory IssueStockLineRequest({
     required String lineId,
     required double issuedQuantity,
@@ -138,7 +138,7 @@ class IssueStockLineRequest with _$IssueStockLineRequest {
 }
 
 @freezed
-class IssuingListResponse with _$IssuingListResponse {
+abstract class IssuingListResponse with _$IssuingListResponse {
   const factory IssuingListResponse({
     required List<StockIssuing> items,
     required int total,
@@ -157,3 +157,4 @@ class IssuingStatusConverter implements JsonConverter<IssuingStatus, String> {
   @override
   String toJson(IssuingStatus e) => e.value;
 }
+

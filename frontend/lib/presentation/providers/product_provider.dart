@@ -2,7 +2,6 @@ import 'package:riverpod/riverpod.dart';
 import 'package:inventory_app/core/usecase/usecase.dart';
 import 'package:inventory_app/features/product/data/repositories/product_repository.dart';
 import 'package:inventory_app/features/product/data/models/product_model.dart';
-import 'package:inventory_app/core/data/paginated.dart';
 import 'package:inventory_app/presentation/providers/network_provider.dart';
 
 /// Products state provider

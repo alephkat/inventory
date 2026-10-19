@@ -42,7 +42,7 @@ enum AdjustmentStatus {
 }
 
 @freezed
-class AuthorizedAdjustment with _$AuthorizedAdjustment {
+abstract class AuthorizedAdjustment with _$AuthorizedAdjustment {
   const factory AuthorizedAdjustment({
     required String id,
     required String adjustmentNumber,
@@ -81,7 +81,7 @@ class AuthorizedAdjustment with _$AuthorizedAdjustment {
 }
 
 @freezed
-class CreateAdjustmentRequest with _$CreateAdjustmentRequest {
+abstract class CreateAdjustmentRequest with _$CreateAdjustmentRequest {
   const factory CreateAdjustmentRequest({
     required String productId,
     required String warehouseId,
@@ -97,7 +97,7 @@ class CreateAdjustmentRequest with _$CreateAdjustmentRequest {
 }
 
 @freezed
-class ApproveAdjustmentRequest with _$ApproveAdjustmentRequest {
+abstract class ApproveAdjustmentRequest with _$ApproveAdjustmentRequest {
   const factory ApproveAdjustmentRequest({
     required String adjustmentId,
     String? notes,
@@ -107,7 +107,7 @@ class ApproveAdjustmentRequest with _$ApproveAdjustmentRequest {
 }
 
 @freezed
-class RejectAdjustmentRequest with _$RejectAdjustmentRequest {
+abstract class RejectAdjustmentRequest with _$RejectAdjustmentRequest {
   const factory RejectAdjustmentRequest({
     required String adjustmentId,
     required String rejectionReason,
@@ -117,7 +117,7 @@ class RejectAdjustmentRequest with _$RejectAdjustmentRequest {
 }
 
 @freezed
-class ApplyAdjustmentRequest with _$ApplyAdjustmentRequest {
+abstract class ApplyAdjustmentRequest with _$ApplyAdjustmentRequest {
   const factory ApplyAdjustmentRequest({
     required String adjustmentId,
     String? notes,
@@ -127,7 +127,7 @@ class ApplyAdjustmentRequest with _$ApplyAdjustmentRequest {
 }
 
 @freezed
-class AdjustmentListResponse with _$AdjustmentListResponse {
+abstract class AdjustmentListResponse with _$AdjustmentListResponse {
   const factory AdjustmentListResponse({
     required List<AuthorizedAdjustment> items,
     required int total,
@@ -154,3 +154,4 @@ class AdjustmentStatusConverter implements JsonConverter<AdjustmentStatus, Strin
   @override
   String toJson(AdjustmentStatus e) => e.value;
 }
+

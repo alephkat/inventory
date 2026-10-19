@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/usecase/usecase.dart';
 import '../../domain/usecases/login.dart';
 import '../auth_providers.dart';
 

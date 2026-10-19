@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 import 'package:inventory_app/core/errors/failures.dart';
 import 'package:inventory_app/core/network/network_service.dart';
 import 'package:inventory_app/features/transfer/data/models/transfer_model.dart';
@@ -27,7 +26,6 @@ abstract class TransferRepository {
   Future<Either<Failure, List<StockTransfer>>> getTransfersByWarehouse(String warehouseId);
 }
 
-@singleton
 class TransferRepositoryImpl implements TransferRepository {
   final NetworkService _networkService;
 

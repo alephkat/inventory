@@ -40,7 +40,7 @@ enum NotificationPriority {
 }
 
 @freezed
-class AppNotification with _$AppNotification {
+abstract class AppNotification with _$AppNotification {
   const factory AppNotification({
     required String id,
     required String title,
@@ -58,7 +58,7 @@ class AppNotification with _$AppNotification {
 }
 
 @freezed
-class PushNotificationRequest with _$PushNotificationRequest {
+abstract class PushNotificationRequest with _$PushNotificationRequest {
   const factory PushNotificationRequest({
     required String title,
     required String body,
@@ -85,3 +85,4 @@ class NotificationPriorityConverter extends EnumStringConverter<NotificationPrio
   @override
   NotificationPriority get fallback => NotificationPriority.medium;
 }
+

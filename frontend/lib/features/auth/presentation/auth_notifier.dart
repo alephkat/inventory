@@ -10,9 +10,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
   final Logout _logout;
   final HasValidSession _hasValidSession;
   final GetCurrentUser _getCurrentUser;
-  final RefreshUserSession _refresh;
 
-  AuthNotifier(this._login, this._logout, this._hasValidSession, this._getCurrentUser, this._refresh)
+  AuthNotifier(this._login, this._logout, this._hasValidSession, this._getCurrentUser)
       : super(const AuthState.unknown()) {
     checkSession();
   }

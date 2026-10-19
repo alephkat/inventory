@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 import 'package:inventory_app/core/errors/failures.dart';
 import 'package:inventory_app/core/network/network_service.dart';
 import 'package:inventory_app/features/supplier/data/models/supplier_detail_model.dart';
@@ -15,7 +14,6 @@ abstract class SupplierDetailRepository {
   Future<Either<Failure, SupplierPerformanceMetrics>> getPerformanceMetrics(String supplierId);
 }
 
-@singleton
 class SupplierDetailRepositoryImpl implements SupplierDetailRepository {
   final NetworkService _networkService;
 

@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 import 'package:inventory_app/core/errors/failures.dart';
 import 'package:inventory_app/core/network/network_service.dart';
 import 'package:inventory_app/features/receiving/data/models/receiving_model.dart';
@@ -24,7 +23,6 @@ abstract class ReceivingRepository {
   Future<Either<Failure, List<ReceivingLine>>> getPendingLines(String purchaseOrderId, String warehouseId);
 }
 
-@singleton
 class ReceivingRepositoryImpl implements ReceivingRepository {
   final NetworkService _networkService;
 

@@ -28,7 +28,7 @@ enum AuditAction {
 }
 
 @freezed
-class AuditLog with _$AuditLog {
+abstract class AuditLog with _$AuditLog {
   const factory AuditLog({
     required String id,
     required String userId,
@@ -47,7 +47,7 @@ class AuditLog with _$AuditLog {
 }
 
 @freezed
-class AuditLogFilter with _$AuditLogFilter {
+abstract class AuditLogFilter with _$AuditLogFilter {
   const factory AuditLogFilter({
     String? userId,
     String? resourceType,
@@ -62,7 +62,7 @@ class AuditLogFilter with _$AuditLogFilter {
 }
 
 @freezed
-class AuditLogListResponse with _$AuditLogListResponse {
+abstract class AuditLogListResponse with _$AuditLogListResponse {
   const factory AuditLogListResponse({
     required List<AuditLog> items,
     required int total,
@@ -81,3 +81,4 @@ class AuditActionConverter extends EnumStringConverter<AuditAction> {
   @override
   AuditAction get fallback => AuditAction.create;
 }
+

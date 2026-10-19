@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'dart:convert';
-import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:inventory_app/core/errors/failures.dart';
@@ -39,7 +38,6 @@ class PrefKeys {
   static const lastSync = 'last_sync';
 }
 
-@singleton
 class AuthRepositoryImpl implements AuthRepository {
   final NetworkService _networkService;
   final FlutterSecureStorage _secureStorage;
@@ -94,7 +92,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, User>> getCurrentUser() async {
     try {
       if (!await _networkService.hasConnection) {
-        return getCachedUser();
+        return await getCachedUser();
       }
 
       final response = await _networkService.dio.get('/auth/me');

@@ -17,6 +17,5 @@ final authNotifierProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref
     ref.read(logoutProvider),
     ref.read(hasValidSessionProvider),
     ref.read(getCurrentUserProvider),
-    ref.read(refreshUserSessionProvider),
   );
 });

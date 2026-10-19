@@ -30,7 +30,7 @@ enum TransferStatus {
 }
 
 @freezed
-class TransferLine with _$TransferLine {
+abstract class TransferLine with _$TransferLine {
   const factory TransferLine({
     required String id,
     required String productId,
@@ -53,7 +53,7 @@ class TransferLine with _$TransferLine {
 }
 
 @freezed
-class TransferHistory with _$TransferHistory {
+abstract class TransferHistory with _$TransferHistory {
   const factory TransferHistory({
     required String id,
     required String transferId,
@@ -69,7 +69,7 @@ class TransferHistory with _$TransferHistory {
 }
 
 @freezed
-class StockTransfer with _$StockTransfer {
+abstract class StockTransfer with _$StockTransfer {
   const factory StockTransfer({
     required String id,
     required String transferNumber,
@@ -112,7 +112,7 @@ class StockTransfer with _$StockTransfer {
 }
 
 @freezed
-class CreateTransferRequest with _$CreateTransferRequest {
+abstract class CreateTransferRequest with _$CreateTransferRequest {
   const factory CreateTransferRequest({
     required String fromWarehouseId,
     required String toWarehouseId,
@@ -125,7 +125,7 @@ class CreateTransferRequest with _$CreateTransferRequest {
 }
 
 @freezed
-class CreateTransferLineRequest with _$CreateTransferLineRequest {
+abstract class CreateTransferLineRequest with _$CreateTransferLineRequest {
   const factory CreateTransferLineRequest({
     required String productId,
     required double quantity,
@@ -140,7 +140,7 @@ class CreateTransferLineRequest with _$CreateTransferLineRequest {
 }
 
 @freezed
-class ApproveTransferRequest with _$ApproveTransferRequest {
+abstract class ApproveTransferRequest with _$ApproveTransferRequest {
   const factory ApproveTransferRequest({
     required String transferId,
     String? notes,
@@ -150,7 +150,7 @@ class ApproveTransferRequest with _$ApproveTransferRequest {
 }
 
 @freezed
-class DispatchTransferRequest with _$DispatchTransferRequest {
+abstract class DispatchTransferRequest with _$DispatchTransferRequest {
   const factory DispatchTransferRequest({
     required String transferId,
     required List<DispatchTransferLineRequest> lines,
@@ -163,7 +163,7 @@ class DispatchTransferRequest with _$DispatchTransferRequest {
 }
 
 @freezed
-class DispatchTransferLineRequest with _$DispatchTransferLineRequest {
+abstract class DispatchTransferLineRequest with _$DispatchTransferLineRequest {
   const factory DispatchTransferLineRequest({
     required String lineId,
     required double dispatchedQuantity,
@@ -176,7 +176,7 @@ class DispatchTransferLineRequest with _$DispatchTransferLineRequest {
 }
 
 @freezed
-class ReceiveTransferRequest with _$ReceiveTransferRequest {
+abstract class ReceiveTransferRequest with _$ReceiveTransferRequest {
   const factory ReceiveTransferRequest({
     required String transferId,
     required List<ReceiveTransferLineRequest> lines,
@@ -187,7 +187,7 @@ class ReceiveTransferRequest with _$ReceiveTransferRequest {
 }
 
 @freezed
-class ReceiveTransferLineRequest with _$ReceiveTransferLineRequest {
+abstract class ReceiveTransferLineRequest with _$ReceiveTransferLineRequest {
   const factory ReceiveTransferLineRequest({
     required String lineId,
     required double receivedQuantity,
@@ -201,7 +201,7 @@ class ReceiveTransferLineRequest with _$ReceiveTransferLineRequest {
 }
 
 @freezed
-class ConfirmTransferRequest with _$ConfirmTransferRequest {
+abstract class ConfirmTransferRequest with _$ConfirmTransferRequest {
   const factory ConfirmTransferRequest({
     required String transferId,
     String? notes,
@@ -211,7 +211,7 @@ class ConfirmTransferRequest with _$ConfirmTransferRequest {
 }
 
 @freezed
-class RejectTransferRequest with _$RejectTransferRequest {
+abstract class RejectTransferRequest with _$RejectTransferRequest {
   const factory RejectTransferRequest({
     required String transferId,
     required String reason,
@@ -221,7 +221,7 @@ class RejectTransferRequest with _$RejectTransferRequest {
 }
 
 @freezed
-class CancelTransferRequest with _$CancelTransferRequest {
+abstract class CancelTransferRequest with _$CancelTransferRequest {
   const factory CancelTransferRequest({
     required String transferId,
     required String reason,
@@ -231,7 +231,7 @@ class CancelTransferRequest with _$CancelTransferRequest {
 }
 
 @freezed
-class TransferListResponse with _$TransferListResponse {
+abstract class TransferListResponse with _$TransferListResponse {
   const factory TransferListResponse({
     required List<StockTransfer> items,
     required int total,
@@ -250,3 +250,4 @@ class TransferStatusConverter implements JsonConverter<TransferStatus, String> {
   @override
   String toJson(TransferStatus e) => e.value;
 }
+

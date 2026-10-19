@@ -1,6 +1,5 @@
 import 'package:inventory_app/core/data/generic_repository.dart';
 import 'package:inventory_app/core/domain/crud_repository.dart';
-import 'package:inventory_app/core/network/network_service.dart';
 import 'package:inventory_app/features/inventory/data/models/inventory_model.dart';
 
 /// Abstract warehouse repository.

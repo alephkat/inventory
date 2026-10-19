@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 import 'package:inventory_app/core/errors/failures.dart';
 import 'package:inventory_app/core/network/network_service.dart';
 import 'package:inventory_app/features/audit/data/models/audit_model.dart';
@@ -11,7 +10,6 @@ abstract class AuditRepository {
   Future<Either<Failure, AuditLog>> getAuditLog(String id);
 }
 
-@singleton
 class AuditRepositoryImpl implements AuditRepository {
   final NetworkService _networkService;
 

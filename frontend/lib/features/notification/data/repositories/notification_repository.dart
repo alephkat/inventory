@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 import 'package:inventory_app/core/errors/failures.dart';
 import 'package:inventory_app/core/network/network_service.dart';
 import 'package:inventory_app/features/notification/data/models/notification_model.dart';
@@ -14,7 +13,6 @@ abstract class NotificationRepository {
   Future<Either<Failure, int>> getUnreadCount();
 }
 
-@singleton
 class NotificationRepositoryImpl implements NotificationRepository {
   final NetworkService _networkService;
 

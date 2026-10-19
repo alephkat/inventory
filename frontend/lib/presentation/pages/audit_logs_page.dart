@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:inventory_app/features/audit/data/models/audit_model.dart';
 import 'package:inventory_app/presentation/providers/data_providers.dart';
-import 'package:inventory_app/presentation/widgets/chips.dart';
 
 class AuditLogsPage extends ConsumerStatefulWidget {
   const AuditLogsPage({super.key});

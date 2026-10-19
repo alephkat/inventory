@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 import 'package:inventory_app/core/errors/failures.dart';
 import 'package:inventory_app/core/network/network_service.dart';
 import 'package:inventory_app/features/issuing/data/models/issuing_model.dart';
@@ -25,7 +24,6 @@ abstract class IssuingRepository {
   Future<Either<Failure, List<IssuingLine>>> getPendingLines(String requesterId, String warehouseId);
 }
 
-@singleton
 class IssuingRepositoryImpl implements IssuingRepository {
   final NetworkService _networkService;
 

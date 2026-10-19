@@ -29,7 +29,7 @@ enum PurchaseOrderStatus {
 }
 
 @freezed
-class PurchaseOrderLine with _$PurchaseOrderLine {
+abstract class PurchaseOrderLine with _$PurchaseOrderLine {
   const factory PurchaseOrderLine({
     required String id,
     required String productId,
@@ -56,7 +56,7 @@ class PurchaseOrderLine with _$PurchaseOrderLine {
 }
 
 @freezed
-class PurchaseOrder with _$PurchaseOrder {
+abstract class PurchaseOrder with _$PurchaseOrder {
   const factory PurchaseOrder({
     required String id,
     required String orderNumber,
@@ -90,7 +90,7 @@ class PurchaseOrder with _$PurchaseOrder {
 }
 
 @freezed
-class CreatePurchaseOrderRequest with _$CreatePurchaseOrderRequest {
+abstract class CreatePurchaseOrderRequest with _$CreatePurchaseOrderRequest {
   const factory CreatePurchaseOrderRequest({
     required String supplierId,
     required String warehouseId,
@@ -104,7 +104,7 @@ class CreatePurchaseOrderRequest with _$CreatePurchaseOrderRequest {
 }
 
 @freezed
-class CreatePurchaseOrderLineRequest with _$CreatePurchaseOrderLineRequest {
+abstract class CreatePurchaseOrderLineRequest with _$CreatePurchaseOrderLineRequest {
   const factory CreatePurchaseOrderLineRequest({
     required String productId,
     required double quantity,
@@ -120,7 +120,7 @@ class CreatePurchaseOrderLineRequest with _$CreatePurchaseOrderLineRequest {
 }
 
 @freezed
-class UpdatePurchaseOrderLineRequest with _$UpdatePurchaseOrderLineRequest {
+abstract class UpdatePurchaseOrderLineRequest with _$UpdatePurchaseOrderLineRequest {
   const factory UpdatePurchaseOrderLineRequest({
     double? quantity,
     double? unitPrice,
@@ -135,7 +135,7 @@ class UpdatePurchaseOrderLineRequest with _$UpdatePurchaseOrderLineRequest {
 }
 
 @freezed
-class SubmitPurchaseOrderRequest with _$SubmitPurchaseOrderRequest {
+abstract class SubmitPurchaseOrderRequest with _$SubmitPurchaseOrderRequest {
   const factory SubmitPurchaseOrderRequest({
     required String purchaseOrderId,
   }) = _SubmitPurchaseOrderRequest;
@@ -144,7 +144,7 @@ class SubmitPurchaseOrderRequest with _$SubmitPurchaseOrderRequest {
 }
 
 @freezed
-class ApprovePurchaseOrderRequest with _$ApprovePurchaseOrderRequest {
+abstract class ApprovePurchaseOrderRequest with _$ApprovePurchaseOrderRequest {
   const factory ApprovePurchaseOrderRequest({
     required String purchaseOrderId,
     String? notes,
@@ -154,7 +154,7 @@ class ApprovePurchaseOrderRequest with _$ApprovePurchaseOrderRequest {
 }
 
 @freezed
-class RejectPurchaseOrderRequest with _$RejectPurchaseOrderRequest {
+abstract class RejectPurchaseOrderRequest with _$RejectPurchaseOrderRequest {
   const factory RejectPurchaseOrderRequest({
     required String purchaseOrderId,
     required String reason,
@@ -164,7 +164,7 @@ class RejectPurchaseOrderRequest with _$RejectPurchaseOrderRequest {
 }
 
 @freezed
-class AcknowledgePurchaseOrderRequest with _$AcknowledgePurchaseOrderRequest {
+abstract class AcknowledgePurchaseOrderRequest with _$AcknowledgePurchaseOrderRequest {
   const factory AcknowledgePurchaseOrderRequest({
     required String purchaseOrderId,
     String? notes,
@@ -174,7 +174,7 @@ class AcknowledgePurchaseOrderRequest with _$AcknowledgePurchaseOrderRequest {
 }
 
 @freezed
-class CancelPurchaseOrderRequest with _$CancelPurchaseOrderRequest {
+abstract class CancelPurchaseOrderRequest with _$CancelPurchaseOrderRequest {
   const factory CancelPurchaseOrderRequest({
     required String purchaseOrderId,
     required String reason,
@@ -184,7 +184,7 @@ class CancelPurchaseOrderRequest with _$CancelPurchaseOrderRequest {
 }
 
 @freezed
-class PurchaseOrderListResponse with _$PurchaseOrderListResponse {
+abstract class PurchaseOrderListResponse with _$PurchaseOrderListResponse {
   const factory PurchaseOrderListResponse({
     required List<PurchaseOrder> items,
     required int total,
@@ -203,3 +203,4 @@ class PurchaseOrderStatusConverter implements JsonConverter<PurchaseOrderStatus,
   @override
   String toJson(PurchaseOrderStatus e) => e.value;
 }
+

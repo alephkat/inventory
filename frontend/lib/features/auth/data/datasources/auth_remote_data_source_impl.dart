@@ -1,7 +1,6 @@
 ﻿import 'package:dio/dio.dart';
 import '../../../../core/network/api_client.dart';
 import '../../data/models/user_model.dart';
-import '../../domain/entities/auth_user.dart';
 import '../datasources/auth_remote_data_source.dart';
 
 Map<String, dynamic> _unwrap(Response response) {

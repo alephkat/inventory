@@ -49,7 +49,7 @@ enum ProductStatus {
 }
 
 @freezed
-class Category with _$Category {
+abstract class Category with _$Category {
   const factory Category({
     required String id,
     required String name,
@@ -65,7 +65,7 @@ class Category with _$Category {
 }
 
 @freezed
-class Supplier with _$Supplier {
+abstract class Supplier with _$Supplier {
   const factory Supplier({
     required String id,
     required String name,
@@ -85,7 +85,7 @@ class Supplier with _$Supplier {
 }
 
 @freezed
-class Product with _$Product {
+abstract class Product with _$Product {
   const factory Product({
     required String id,
     required String sku,
@@ -122,7 +122,7 @@ class Product with _$Product {
 }
 
 @freezed
-class CreateProductRequest with _$CreateProductRequest {
+abstract class CreateProductRequest with _$CreateProductRequest {
   const factory CreateProductRequest({
     required String sku,
     String? barcode,
@@ -149,7 +149,7 @@ class CreateProductRequest with _$CreateProductRequest {
 }
 
 @freezed
-class UpdateProductRequest with _$UpdateProductRequest {
+abstract class UpdateProductRequest with _$UpdateProductRequest {
   const factory UpdateProductRequest({
     String? sku,
     String? barcode,
@@ -190,3 +190,4 @@ class ProductStatusConverter extends EnumStringConverter<ProductStatus> {
   @override
   ProductStatus get fallback => ProductStatus.active;
 }
+

@@ -81,6 +81,5 @@ class GenericCrudRepository<T, CreateReq, UpdateReq>
   @override
   Future<Result<void>> delete(String id) => guard(() async {
         await dio.delete('/$resource/$id');
-        return null;
       });
 }

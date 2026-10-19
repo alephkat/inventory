@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 import 'package:inventory_app/core/errors/failures.dart';
 import 'package:inventory_app/core/network/network_service.dart';
 import 'package:inventory_app/features/order/data/models/order_model.dart';
@@ -14,7 +13,6 @@ abstract class CustomerRepository {
   Future<Either<Failure, void>> deleteCustomer(String id);
 }
 
-@singleton
 class CustomerRepositoryImpl implements CustomerRepository {
   final NetworkService _networkService;
 

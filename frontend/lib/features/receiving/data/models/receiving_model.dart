@@ -21,7 +21,7 @@ enum ReceivingStatus {
 }
 
 @freezed
-class ReceivingLine with _$ReceivingLine {
+abstract class ReceivingLine with _$ReceivingLine {
   const factory ReceivingLine({
     required String id,
     required String productId,
@@ -43,7 +43,7 @@ class ReceivingLine with _$ReceivingLine {
 }
 
 @freezed
-class StockReceiving with _$StockReceiving {
+abstract class StockReceiving with _$StockReceiving {
   const factory StockReceiving({
     required String id,
     required String receivingNumber,
@@ -72,7 +72,7 @@ class StockReceiving with _$StockReceiving {
 }
 
 @freezed
-class CreateReceivingRequest with _$CreateReceivingRequest {
+abstract class CreateReceivingRequest with _$CreateReceivingRequest {
   const factory CreateReceivingRequest({
     required String supplierId,
     String? purchaseOrderId,
@@ -85,7 +85,7 @@ class CreateReceivingRequest with _$CreateReceivingRequest {
 }
 
 @freezed
-class CreateReceivingLineRequest with _$CreateReceivingLineRequest {
+abstract class CreateReceivingLineRequest with _$CreateReceivingLineRequest {
   const factory CreateReceivingLineRequest({
     required String productId,
     required double orderedQuantity,
@@ -100,7 +100,7 @@ class CreateReceivingLineRequest with _$CreateReceivingLineRequest {
 }
 
 @freezed
-class VerifyReceivingRequest with _$VerifyReceivingRequest {
+abstract class VerifyReceivingRequest with _$VerifyReceivingRequest {
   const factory VerifyReceivingRequest({
     required String receivingId,
     required List<VerifyReceivingLineRequest> lines,
@@ -111,7 +111,7 @@ class VerifyReceivingRequest with _$VerifyReceivingRequest {
 }
 
 @freezed
-class VerifyReceivingLineRequest with _$VerifyReceivingLineRequest {
+abstract class VerifyReceivingLineRequest with _$VerifyReceivingLineRequest {
   const factory VerifyReceivingLineRequest({
     required String lineId,
     required double verifiedQuantity,
@@ -124,7 +124,7 @@ class VerifyReceivingLineRequest with _$VerifyReceivingLineRequest {
 }
 
 @freezed
-class ConfirmReceivingRequest with _$ConfirmReceivingRequest {
+abstract class ConfirmReceivingRequest with _$ConfirmReceivingRequest {
   const factory ConfirmReceivingRequest({
     required String receivingId,
     String? notes,
@@ -134,7 +134,7 @@ class ConfirmReceivingRequest with _$ConfirmReceivingRequest {
 }
 
 @freezed
-class ReceivingListResponse with _$ReceivingListResponse {
+abstract class ReceivingListResponse with _$ReceivingListResponse {
   const factory ReceivingListResponse({
     required List<StockReceiving> items,
     required int total,
@@ -153,3 +153,4 @@ class ReceivingStatusConverter implements JsonConverter<ReceivingStatus, String>
   @override
   String toJson(ReceivingStatus e) => e.value;
 }
+

@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 import 'package:inventory_app/core/errors/failures.dart';
 import 'package:inventory_app/core/network/network_service.dart';
 import 'package:inventory_app/features/order/data/models/order_model.dart';
@@ -17,7 +16,6 @@ abstract class OrderRepository {
   Future<Either<Failure, PurchaseOrder>> receivePurchaseOrder(String id, Map<String, dynamic> items);
 }
 
-@singleton
 class OrderRepositoryImpl implements OrderRepository {
   final NetworkService _networkService;
 

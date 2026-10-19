@@ -4,7 +4,7 @@ part 'report_model.g.dart';
 part 'report_model.freezed.dart';
 
 @freezed
-class DashboardStats with _$DashboardStats {
+abstract class DashboardStats with _$DashboardStats {
   const factory DashboardStats({
     required double totalProducts,
     required double totalStockQuantity,
@@ -26,7 +26,7 @@ class DashboardStats with _$DashboardStats {
 }
 
 @freezed
-class RecentTransaction with _$RecentTransaction {
+abstract class RecentTransaction with _$RecentTransaction {
   const factory RecentTransaction({
     required String id,
     required String type,
@@ -43,7 +43,7 @@ class RecentTransaction with _$RecentTransaction {
 }
 
 @freezed
-class LowStockAlert with _$LowStockAlert {
+abstract class LowStockAlert with _$LowStockAlert {
   const factory LowStockAlert({
     required String productId,
     required String productName,
@@ -59,7 +59,7 @@ class LowStockAlert with _$LowStockAlert {
 }
 
 @freezed
-class ExpiringProduct with _$ExpiringProduct {
+abstract class ExpiringProduct with _$ExpiringProduct {
   const factory ExpiringProduct({
     required String productId,
     required String productName,
@@ -75,7 +75,7 @@ class ExpiringProduct with _$ExpiringProduct {
 }
 
 @freezed
-class DashboardFilter with _$DashboardFilter {
+abstract class DashboardFilter with _$DashboardFilter {
   const factory DashboardFilter({
     DateTime? startDate,
     DateTime? endDate,
@@ -89,7 +89,7 @@ class DashboardFilter with _$DashboardFilter {
 }
 
 @freezed
-class StockMovementChart with _$StockMovementChart {
+abstract class StockMovementChart with _$StockMovementChart {
   const factory StockMovementChart({
     required List<ChartPoint> received,
     required List<ChartPoint> issued,
@@ -101,7 +101,7 @@ class StockMovementChart with _$StockMovementChart {
 }
 
 @freezed
-class ChartPoint with _$ChartPoint {
+abstract class ChartPoint with _$ChartPoint {
   const factory ChartPoint({
     required String label,
     required double value,
@@ -112,7 +112,7 @@ class ChartPoint with _$ChartPoint {
 }
 
 @freezed
-class InventoryValueChart with _$InventoryValueChart {
+abstract class InventoryValueChart with _$InventoryValueChart {
   const factory InventoryValueChart({
     required List<ChartPoint> data,
     required List<String> labels,
@@ -123,7 +123,7 @@ class InventoryValueChart with _$InventoryValueChart {
 }
 
 @freezed
-class FastMovingProduct with _$FastMovingProduct {
+abstract class FastMovingProduct with _$FastMovingProduct {
   const factory FastMovingProduct({
     required String productId,
     required String productName,
@@ -137,7 +137,7 @@ class FastMovingProduct with _$FastMovingProduct {
 }
 
 @freezed
-class SlowMovingProduct with _$SlowMovingProduct {
+abstract class SlowMovingProduct with _$SlowMovingProduct {
   const factory SlowMovingProduct({
     required String productId,
     required String productName,
@@ -151,7 +151,7 @@ class SlowMovingProduct with _$SlowMovingProduct {
 }
 
 @freezed
-class Report with _$Report {
+abstract class Report with _$Report {
   const factory Report({
     required String id,
     required String name,

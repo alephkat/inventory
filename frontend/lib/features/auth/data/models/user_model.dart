@@ -94,7 +94,7 @@ class RolePermissions {
 }
 
 @freezed
-class User with _$User {
+abstract class User with _$User {
   const factory User({
     required String id,
     required String username,
@@ -116,7 +116,7 @@ class User with _$User {
 }
 
 @freezed
-class AuthTokens with _$AuthTokens {
+abstract class AuthTokens with _$AuthTokens {
   const factory AuthTokens({
     required String accessToken,
     required String refreshToken,
@@ -128,7 +128,7 @@ class AuthTokens with _$AuthTokens {
 }
 
 @freezed
-class LoginResponse with _$LoginResponse {
+abstract class LoginResponse with _$LoginResponse {
   const factory LoginResponse({
     required User user,
     required AuthTokens tokens,
@@ -138,7 +138,7 @@ class LoginResponse with _$LoginResponse {
 }
 
 @freezed
-class LoginRequest with _$LoginRequest {
+abstract class LoginRequest with _$LoginRequest {
   const factory LoginRequest({
     required String username,
     required String password,
@@ -148,7 +148,7 @@ class LoginRequest with _$LoginRequest {
 }
 
 @freezed
-class ChangePasswordRequest with _$ChangePasswordRequest {
+abstract class ChangePasswordRequest with _$ChangePasswordRequest {
   const factory ChangePasswordRequest({
     required String currentPassword,
     required String newPassword,
@@ -158,7 +158,7 @@ class ChangePasswordRequest with _$ChangePasswordRequest {
 }
 
 @freezed
-class RegisterUserRequest with _$RegisterUserRequest {
+abstract class RegisterUserRequest with _$RegisterUserRequest {
   const factory RegisterUserRequest({
     required String username,
     required String email,
@@ -198,3 +198,4 @@ class PermissionListConverter implements JsonConverter<List<Permission>, dynamic
   @override
   List<String> toJson(List<Permission> perms) => perms.map((e) => e.value).toList();
 }
+

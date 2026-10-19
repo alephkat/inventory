@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 import 'package:inventory_app/core/errors/failures.dart';
 import 'package:inventory_app/core/network/network_service.dart';
 import 'package:inventory_app/features/product/data/models/product_model.dart';
@@ -14,7 +13,6 @@ abstract class SupplierRepository {
   Future<Either<Failure, void>> deleteSupplier(String id);
 }
 
-@singleton
 class SupplierRepositoryImpl implements SupplierRepository {
   final NetworkService _networkService;
 

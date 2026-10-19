@@ -1,22 +1,17 @@
-﻿# Simple Inventory App
+﻿# Simple Inventory App - Zambia
+Simple inventory for small shops.
 
-Easy inventory management for a small shop in Zambia.
+## Quick Start
+1. Windows: double-click start.bat (starts backend)
+2. New terminal: cd frontend && flutter run
 
-## How to Run
+## Backend
+cd backend; npm install; npx prisma generate; npx prisma db push; node src/seed.js; npm start
+- URL: http://localhost:4000
+- Login: admin/admin123
 
-### Backend
+## Frontend
+cd frontend; flutter pub get; flutter run
 
-1. cd backend
-2. npm install
-3. npx prisma generate
-4. npx prisma db push
-5. node src/seed.js
-6. npm start (runs on http://localhost:4000)
-
-Login: admin / admin123
-
-### Frontend (Flutter)
-
-1. cd frontend
-2. flutter pub get
-3. flutter run
+## Neon DB
+Use neon-schema.sql in Neon SQL editor if using Postgres.

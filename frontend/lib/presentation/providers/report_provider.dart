@@ -1,5 +1,4 @@
 import 'package:riverpod/riverpod.dart';
-import 'package:inventory_app/features/report/data/repositories/report_repository.dart';
 import 'package:inventory_app/features/report/data/models/report_model.dart';
 import 'package:inventory_app/presentation/providers/network_provider.dart';
 

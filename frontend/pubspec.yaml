@@ -4,7 +4,7 @@ publish_to: 'none'
 
 version: 1.0.0+1
 environment:
-  sdk: '>=3.5.0 <4.0.0'
+  sdk: ^3.8.0
 
 dependencies:
   flutter:
@@ -18,7 +18,6 @@ dependencies:
   flutter_riverpod: ^2.5.1
   riverpod: ^2.5.1
   get_it: ^8.3.0
-  injectable: ^2.5.1
 
   # Navigation
   go_router: ^15.1.2
@@ -30,31 +29,17 @@ dependencies:
   connectivity_plus: ^6.0.3
   shared_preferences: ^2.3.2
 
-  # Local Storage
-  drift: ^2.22.0
-  drift_dev: ^2.22.0
-  # `sqlite3_flutter` was a dead package; drift's native backend needs the
-  # `sqlite3` Dart API plus `sqlite3_flutter_libs` for the bundled native
-  # binary. 0.5.x is the line that matches `sqlite3` 2.x / drift 2.x --
-  # 0.6.0+ is an intentional no-op for the sqlite3 3.x era.
-  sqlite3: ^2.4.6
-  sqlite3_flutter_libs: ^0.5.24
-  path_provider: ^2.1.5
-  path: ^1.9.0
-
   # Secure Storage (sensitive credentials/tokens)
   flutter_secure_storage: ^10.3.4
 
   # Serialization
-  # freezed 2.x / json_serializable 6.9 / drift_dev 2.28 /
-  # injectable_generator 2.7 are the newest self-consistent generator set for
-  # build_runner 2.5.x; do not jump to the analyzer-14 generation (build_runner
-  # >= 2.15, freezed 4, injectable_generator 3) because those published
-  # artifacts cannot generate a working build script here.
+  # freezed 4 + json_serializable 6.15 / build_runner 2.17 are compatible with
+  # Dart 3.13 SDK (analyzer 14). injectable_generator is dropped: @Injectable
+  # is never used; DI is manual via get_it.
   json_annotation: ^4.9.0
-  json_serializable: ^6.9.0
-  freezed_annotation: ^2.4.1
-  freezed: ^2.5.2
+  json_serializable: ^6.15.1
+  freezed_annotation: ^3.1.0
+  freezed: ^4.0.3
   equatable: ^2.0.5
   collection: ^1.17.0
 
@@ -84,10 +69,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  build_runner: ^2.4.13
-  injectable_generator: ^2.4.0
-  # json_serializable, drift_dev and freezed are already listed under
-  # dependencies; a duplicate dev_dependency only triggers a lint.
+  build_runner: ^2.17.1
 
 flutter:
   uses-material-design: true

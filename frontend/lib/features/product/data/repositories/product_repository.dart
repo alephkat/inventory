@@ -1,7 +1,6 @@
 import 'package:inventory_app/core/data/api_response.dart';
 import 'package:inventory_app/core/data/generic_repository.dart';
 import 'package:inventory_app/core/domain/crud_repository.dart';
-import 'package:inventory_app/core/network/network_service.dart';
 import 'package:inventory_app/core/usecase/usecase.dart';
 import 'package:inventory_app/features/product/data/models/product_model.dart';
 

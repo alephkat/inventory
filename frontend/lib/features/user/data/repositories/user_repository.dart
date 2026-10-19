@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 import 'package:inventory_app/core/errors/failures.dart';
 import 'package:inventory_app/core/network/network_service.dart';
 import 'package:inventory_app/features/auth/data/models/user_model.dart';
@@ -15,7 +14,6 @@ abstract class UserRepository {
   Future<Either<Failure, void>> updateUserStatus(String id, bool isActive);
 }
 
-@singleton
 class UserRepositoryImpl implements UserRepository {
   final NetworkService _networkService;
 

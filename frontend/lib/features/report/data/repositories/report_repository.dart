@@ -28,7 +28,7 @@ class ReportRepositoryImpl extends NetworkRepository implements ReportRepository
   Future<Result<InventoryValueChart>> getInventoryValueChart(DashboardFilter filter) => guard(() async {
         final response = await dio.get('/dashboard/charts/inventory-value', queryParameters: _filterQuery(filter));
         final data = unwrapEnvelope(response) as JsonMap;
-        final rows = (data['data'] as List? ?? const []) as List;
+        final rows = (data['data'] as List? ?? const []);
         final chartData = [
           for (final dynamic row in rows)
             ChartPoint(

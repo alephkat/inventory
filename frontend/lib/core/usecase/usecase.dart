@@ -7,10 +7,10 @@ import '../errors/exceptions.dart';
 typedef Result<T> = Either<Failure, T>;
 
 /// Base use case interface.
-abstract class UseCase<Type, Params> {
+abstract class UseCase<R, Params> {
   const UseCase();
 
-  Future<Result<Type>> call(Params params);
+  Future<Result<R>> call(Params params);
 }
 
 /// No-params use case.

@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 import 'package:inventory_app/core/errors/failures.dart';
 import 'package:inventory_app/core/network/network_service.dart';
 import 'package:inventory_app/features/purchase_order/data/models/purchase_order_model.dart';
@@ -27,7 +26,6 @@ abstract class PurchaseOrderRepository {
   Future<Either<Failure, List<PurchaseOrder>>> getPendingApprovals();
 }
 
-@singleton
 class PurchaseOrderRepositoryImpl implements PurchaseOrderRepository {
   final NetworkService _networkService;
 

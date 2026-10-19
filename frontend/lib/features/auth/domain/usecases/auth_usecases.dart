@@ -1,13 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:injectable/injectable.dart';
 import 'package:inventory_app/core/errors/failures.dart';
 import 'package:inventory_app/core/usecase/usecase.dart';
 import 'package:inventory_app/features/auth/data/models/user_model.dart';
 import 'package:inventory_app/features/auth/data/repositories/auth_repository.dart';
 
 /// Use case for user login
-@injectable
 class LoginUseCase implements UseCase<LoginResponse, LoginParams> {
   final AuthRepository _repository;
 
@@ -20,7 +18,6 @@ class LoginUseCase implements UseCase<LoginResponse, LoginParams> {
 }
 
 /// Use case for user logout
-@injectable
 class LogoutUseCase implements UseCase<void, NoParams> {
   final AuthRepository _repository;
 
@@ -33,7 +30,6 @@ class LogoutUseCase implements UseCase<void, NoParams> {
 }
 
 /// Use case for getting current user
-@injectable
 class GetCurrentUserUseCase implements UseCase<User, NoParams> {
   final AuthRepository _repository;
 
@@ -46,7 +42,6 @@ class GetCurrentUserUseCase implements UseCase<User, NoParams> {
 }
 
 /// Use case for changing password
-@injectable
 class ChangePasswordUseCase implements UseCase<void, ChangePasswordParams> {
   final AuthRepository _repository;
 

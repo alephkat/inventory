@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../../core/utils/converters.dart';
 import '../../../order/data/models/order_model.dart';
-import '../../../product/data/models/product_model.dart';
 
 part 'supplier_detail_model.g.dart';
 part 'supplier_detail_model.freezed.dart';
@@ -22,7 +21,7 @@ enum SupplierStatus {
 }
 
 @freezed
-class SupplierDetail with _$SupplierDetail {
+abstract class SupplierDetail with _$SupplierDetail {
   const factory SupplierDetail({
     required String id,
     required String name,
@@ -51,7 +50,7 @@ class SupplierDetail with _$SupplierDetail {
 }
 
 @freezed
-class SupplierProduct with _$SupplierProduct {
+abstract class SupplierProduct with _$SupplierProduct {
   const factory SupplierProduct({
     required String id,
     required String productId,
@@ -70,7 +69,7 @@ class SupplierProduct with _$SupplierProduct {
 }
 
 @freezed
-class PurchaseHistoryItem with _$PurchaseHistoryItem {
+abstract class PurchaseHistoryItem with _$PurchaseHistoryItem {
   const factory PurchaseHistoryItem({
     required String id,
     required String orderNumber,
@@ -87,7 +86,7 @@ class PurchaseHistoryItem with _$PurchaseHistoryItem {
 }
 
 @freezed
-class SupplierPerformanceMetrics with _$SupplierPerformanceMetrics {
+abstract class SupplierPerformanceMetrics with _$SupplierPerformanceMetrics {
   const factory SupplierPerformanceMetrics({
     required double onTimeDeliveryRate,
     required double qualityScore,
@@ -102,7 +101,7 @@ class SupplierPerformanceMetrics with _$SupplierPerformanceMetrics {
 }
 
 @freezed
-class UpdateSupplierStatusRequest with _$UpdateSupplierStatusRequest {
+abstract class UpdateSupplierStatusRequest with _$UpdateSupplierStatusRequest {
   const factory UpdateSupplierStatusRequest({
     required SupplierStatus status,
     String? reason,
@@ -112,7 +111,7 @@ class UpdateSupplierStatusRequest with _$UpdateSupplierStatusRequest {
 }
 
 @freezed
-class CreateSupplierProductRequest with _$CreateSupplierProductRequest {
+abstract class CreateSupplierProductRequest with _$CreateSupplierProductRequest {
   const factory CreateSupplierProductRequest({
     required String productId,
     required double costPrice,
@@ -132,3 +131,4 @@ class SupplierStatusConverter implements JsonConverter<SupplierStatus, String> {
   @override
   String toJson(SupplierStatus e) => e.value;
 }
+

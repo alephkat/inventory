@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../../core/utils/converters.dart';
 import '../../data/models/user_model.dart';
 
 part 'auth_user.g.dart';
@@ -7,7 +6,7 @@ part 'auth_user.freezed.dart';
 
 /// Domain entity for the authenticated user (presentation-safe view of [User]).
 @freezed
-class AuthUser with _$AuthUser {
+abstract class AuthUser with _$AuthUser {
   const factory AuthUser({
     required String id,
     required String username,
@@ -34,7 +33,7 @@ extension AuthUserX on AuthUser {
 
 /// Session envelope persisted locally.
 @freezed
-class AuthSession with _$AuthSession {
+abstract class AuthSession with _$AuthSession {
   const factory AuthSession({
     required String accessToken,
     required String refreshToken,
@@ -47,3 +46,4 @@ class AuthSession with _$AuthSession {
 extension AuthSessionX on AuthSession {
   bool get isExpired => DateTime.now().isAfter(expiresAt);
 }
+

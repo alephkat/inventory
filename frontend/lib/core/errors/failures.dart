@@ -2,51 +2,43 @@ import 'package:equatable/equatable.dart';
 
 /// Base failure class for domain-level errors
 abstract class Failure extends Equatable {
+  const Failure(this.message, [this.code]);
+
   final String message;
   final int? code;
-
-  const Failure(this.message, [this.code]);
 
   @override
   List<Object?> get props => [message, code];
 }
 
 class ServerFailure extends Failure {
-  const ServerFailure([String message = 'Server error occurred', int? code])
-      : super(message, code);
+  const ServerFailure([super.message = 'Server error occurred', super.code]);
 }
 
 class NetworkFailure extends Failure {
-  const NetworkFailure([String message = 'No internet connection'])
-      : super(message);
+  const NetworkFailure([super.message = 'No internet connection']);
 }
 
 class CacheFailure extends Failure {
-  const CacheFailure([String message = 'Cache error occurred'])
-      : super(message);
+  const CacheFailure([super.message = 'Cache error occurred']);
 }
 
 class AuthFailure extends Failure {
-  const AuthFailure([String message = 'Authentication failed'])
-      : super(message);
+  const AuthFailure([super.message = 'Authentication failed']);
 }
 
 class PermissionFailure extends Failure {
-  const PermissionFailure([String message = 'Permission denied'])
-      : super(message);
+  const PermissionFailure([super.message = 'Permission denied']);
 }
 
 class ValidationFailure extends Failure {
-  const ValidationFailure([String message = 'Validation failed'])
-      : super(message);
+  const ValidationFailure([super.message = 'Validation failed']);
 }
 
 class NotFoundFailure extends Failure {
-  const NotFoundFailure([String message = 'Resource not found'])
-      : super(message);
+  const NotFoundFailure([super.message = 'Resource not found']);
 }
 
 class UnknownFailure extends Failure {
-  const UnknownFailure([String message = 'An unexpected error occurred'])
-      : super(message);
+  const UnknownFailure([super.message = 'An unexpected error occurred']);
 }
