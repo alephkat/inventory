@@ -44,3 +44,6 @@ class AuthSession with _$AuthSession {
 
   factory AuthSession.fromJson(Map<String, dynamic> json) => _$AuthSessionFromJson(json);
 }
+extension AuthSessionX on AuthSession {
+  bool get isExpired => DateTime.now().isAfter(expiresAt);
+}

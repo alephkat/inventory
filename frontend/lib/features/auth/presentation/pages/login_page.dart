@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../auth_providers.dart';
 import '../auth_state.dart';
@@ -12,7 +12,6 @@ class LoginPage extends ConsumerStatefulWidget {
 
 class _LoginPageState extends ConsumerState<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  // No prefilled credentials: see the note in presentation/pages/login_page.dart.
   final _username = TextEditingController();
   final _password = TextEditingController();
   bool _obscure = true;
@@ -35,40 +34,42 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 child: Form(
                   key: _formKey,
                   child: Column(mainAxisSize: MainAxisSize.min, children: [
-                  const Icon(Icons.lock, size: 48),
-                  const SizedBox(height: 8),
-                  const Text('Inventory Manager', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600)),
-                  const SizedBox(height: 24),
-                  if (state.failureMessage != null && state.failureMessage!.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: Text(state.failureMessage!, style: TextStyle(color: Theme.of(context).colorScheme.error)),
+                    const Icon(Icons.store, size: 48),
+                    const SizedBox(height: 8),
+                    const Text('Simple Inventory', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600)),
+                    const SizedBox(height: 4),
+                    Text('For a small shop in Zambia', style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant)),
+                    const SizedBox(height: 24),
+                    if (state.failureMessage != null && state.failureMessage!.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: Text(state.failureMessage!, style: TextStyle(color: Theme.of(context).colorScheme.error)),
+                      ),
+                    TextFormField(
+                      controller: _username,
+                      decoration: const InputDecoration(labelText: 'Username', border: OutlineInputBorder(), prefixIcon: Icon(Icons.person)),
+                      enabled: !isLoading,
+                      onFieldSubmitted: (_) => _submit(),
                     ),
-                  TextFormField(
-                    controller: _username,
-                    decoration: const InputDecoration(labelText: 'Username', border: OutlineInputBorder(), prefixIcon: Icon(Icons.person)),
-                    enabled: !isLoading,
-                    onFieldSubmitted: (_) => _submit(),
-                  ),
-                  const SizedBox(height: 16),
-                  TextFormField(
-                    controller: _password,
-                    obscureText: _obscure,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      border: const OutlineInputBorder(),
-                      prefixIcon: const Icon(Icons.key),
-                      suffixIcon: IconButton(icon: Icon(_obscure ? Icons.visibility : Icons.visibility_off), onPressed: () => setState(() => _obscure = !_obscure)),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _password,
+                      obscureText: _obscure,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        border: const OutlineInputBorder(),
+                        prefixIcon: const Icon(Icons.key),
+                        suffixIcon: IconButton(icon: Icon(_obscure ? Icons.visibility : Icons.visibility_off), onPressed: () => setState(() => _obscure = !_obscure)),
+                      ),
+                      enabled: !isLoading,
+                      onFieldSubmitted: (_) => _submit(),
                     ),
-                    enabled: !isLoading,
-                    onFieldSubmitted: (_) => _submit(),
-                  ),
-                  const SizedBox(height: 24),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(onPressed: isLoading ? null : _submit, child: isLoading ? const SizedBox.square(dimension: 18, child: CircularProgressIndicator(strokeWidth: 2)) : const Text('Sign in')),
-                  ),
-                ]),
+                    const SizedBox(height: 24),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(onPressed: isLoading ? null : _submit, child: isLoading ? const SizedBox.square(dimension: 18, child: CircularProgressIndicator(strokeWidth: 2)) : const Text('Sign in')),
+                    ),
+                  ]),
                 ),
               ),
             ),
@@ -80,7 +81,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   void _submit() {
     if (_formKey.currentState!.validate()) {
-      ref.read(authNotifierProvider.notifier).login(_username.text, _password.text);
+      ref.read(authNotifierProvider.notifier).login(_username.text.trim(), _password.text);
     }
+  }
+
+  @override
+  void dispose() {
+    _username.dispose();
+    _password.dispose();
+    super.dispose();
   }
 }

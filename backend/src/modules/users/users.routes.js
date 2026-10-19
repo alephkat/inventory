@@ -1,22 +1,18 @@
-import { Router } from 'express';
+﻿import { Router } from 'express';
 import { userService } from './users.service.js';
 import { validate } from '../../shared/middlewares/validate.js';
-import { requirePermission } from '../../shared/middlewares/auth.js';
 import { getPagination } from '../../shared/utils/response.js';
 import { z } from 'zod';
 
 const UpdateUserSchema = z.object({
   fullName: z.string().optional(),
   email: z.string().email().optional(),
-  roleId: z.string().uuid().optional(),
-  warehouseId: z.string().uuid().nullable().optional(),
-  status: z.enum(['ACTIVE', 'INACTIVE', 'SUSPENDED', 'PENDING_APPROVAL']).optional(),
+  role: z.string().optional(),
+  status: z.string().optional(),
   isActive: z.boolean().optional(),
 });
 
 export const usersRouter = Router();
-
-usersRouter.use(requirePermission('manage_users'));
 
 function send(res, data, code = 200, message) {
   res.status(code).json({ success: true, data, message: message ?? null, meta: null });
@@ -28,9 +24,8 @@ usersRouter.get('/', async (req, res, next) => {
     const result = await userService.list({
       ...pg,
       search: req.query.search,
-      roleId: req.query.roleId,
+      role: req.query.role,
       status: req.query.status,
-      warehouseId: req.query.warehouseId,
     });
     res.json({ success: true, data: result, message: null, meta: null });
   } catch (e) {

@@ -1,19 +1,9 @@
-import jwt from 'jsonwebtoken';
+﻿import jwt from 'jsonwebtoken';
 import { prisma } from '../config/database.js';
 import { config } from '../config/env.js';
 
 export { requirePermission, requireRole } from './rbac.js';
 
-/**
- * Authentication middleware.
- * Verifies the JWT access token and hydrates `req.user` with the user's
- * id, username, role, and the full set of permission values granted to that
- * role — loaded fresh from the database on every request so permission
- * changes take effect immediately without a re-login.
- *
- * This is the SINGLE SOURCE OF TRUTH for authorization on the backend.
- * Client-side permission flags are convenience only and never trusted.
- */
 export const requireAuth = async (req, _res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -39,9 +29,6 @@ export const requireAuth = async (req, _res, next) => {
   try {
     const user = await prisma.user.findUnique({
       where: { id: payload.sub },
-      include: {
-        role: { include: { permissions: { include: { permission: true } } } },
-      },
     });
 
     if (!user || !user.isActive) {
@@ -55,10 +42,7 @@ export const requireAuth = async (req, _res, next) => {
     req.user = {
       id: user.id,
       username: user.username,
-      role: user.role.name,
-      permissions: user.role.permissions.map((rp) => rp.permission.value),
-      status: user.status,
-      warehouseId: user.warehouseId,
+      role: user.role,
     };
 
     next();
@@ -67,9 +51,6 @@ export const requireAuth = async (req, _res, next) => {
   }
 };
 
-/**
- * Require an authenticated user; use after requireAuth.
- */
 export const requireAuthenticated = (req, res, next) => {
   if (!req.user) {
     return res.status(401).json({

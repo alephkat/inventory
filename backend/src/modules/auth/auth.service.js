@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+﻿import { createHash } from 'node:crypto';
 import { JwtService } from '../../shared/utils/jwt.js';
 import { PasswordService } from '../../shared/utils/password.js';
 import { prisma } from '../../shared/config/database.js';
@@ -6,14 +6,9 @@ import { ApiError } from '../../shared/errors/ApiError.js';
 import { createAuditLog } from '../../shared/utils/audit.js';
 
 export class AuthService {
-  /**
-   * Authenticate by username + password. Returns user info and tokens.
-   * Permissions are attached server-side from the role, never from the client.
-   */
   async login(username, password) {
     const user = await prisma.user.findFirst({
       where: { username, isActive: true },
-      include: { role: { include: { permissions: { include: { permission: true } } } } },
     });
     if (!user) {
       throw ApiError.unauthorized('Invalid credentials');
@@ -50,11 +45,6 @@ export class AuthService {
       throw ApiError.conflict('Username or email already exists');
     }
 
-    const role = await prisma.role.findUnique({ where: { id: input.roleId } });
-    if (!role) {
-      throw ApiError.badRequest('Invalid role');
-    }
-
     const passwordHash = await PasswordService.hash(input.password);
     const user = await prisma.user.create({
       data: {
@@ -62,12 +52,9 @@ export class AuthService {
         email: input.email,
         fullName: input.fullName,
         passwordHash,
-        roleId: input.roleId,
-        warehouseId: input.warehouseId ?? undefined,
-        createdBy: adminUserId,
-        status: 'ACTIVE',
+        role: input.role || 'STAFF',
+        isActive: true,
       },
-      include: { role: { include: { permissions: { include: { permission: true } } } } },
     });
 
     await createAuditLog({
@@ -80,42 +67,9 @@ export class AuthService {
     return this.toUserDto(user);
   }
 
-  async refreshToken(refreshToken) {
-    const refreshTokenHash = this.hashRefreshToken(refreshToken);
-    // Verifying here is the point: an expired or forged token throws before
-    // any session lookup happens. The claims themselves are re-read from the
-    // session's user below rather than trusted from the token.
-    try {
-      JwtService.verifyRefreshToken(refreshToken);
-    } catch {
-      throw ApiError.unauthorized('Invalid refresh token');
-    }
-
-    const session = await prisma.userSession.findUnique({
-      where: { refreshToken: refreshTokenHash },
-      include: { user: { include: { role: { include: { permissions: { include: { permission: true } } } } } } },
-    });
-    if (!session || session.expiresAt < new Date()) {
-      throw ApiError.unauthorized('Refresh session expired or invalid');
-    }
-
-    const user = session.user;
-    await prisma.userSession.delete({ where: { id: session.id } });
-
-    const tokens = await this.issueTokens(user);
-    const userDto = this.toUserDto(user);
-    return { user: userDto, tokens };
-  }
-
-  async logout(refreshToken) {
-    await prisma.userSession.deleteMany({ where: { refreshToken: this.hashRefreshToken(refreshToken) } });
-    return { success: true };
-  }
-
   async me(userId) {
     const user = await prisma.user.findUnique({
       where: { id: userId },
-      include: { role: { include: { permissions: { include: { permission: true } } } } },
     });
     if (!user) {
       throw ApiError.notFound('User not found');
@@ -139,54 +93,32 @@ export class AuthService {
   }
 
   async issueTokens(user) {
-    // Permissions are deliberately not embedded in the token: the auth
-    // middleware re-reads them from the database on every request so a role
-    // change takes effect immediately instead of at token expiry.
     const payload = {
       sub: user.id,
       username: user.username,
-      role: user.role.name,
-      status: user.status,
+      role: user.role,
     };
     const accessToken = JwtService.signAccessToken(payload);
     const refreshToken = JwtService.signRefreshToken(payload);
-
+    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+    const refreshTokenHash = this.hashRefreshToken(refreshToken);
     await prisma.userSession.create({
       data: {
         userId: user.id,
-        refreshToken: this.hashRefreshToken(refreshToken),
-        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-        userAgent: undefined,
-        ipAddress: undefined,
+        refreshToken: refreshTokenHash,
+        expiresAt,
       },
     });
-    return { accessToken, refreshToken, tokenType: 'Bearer', expiresAt: new Date(Date.now() + 15 * 60 * 1000) };
+    return { accessToken, refreshToken };
   }
 
-  hashRefreshToken(refreshToken) {
-    return createHash('sha256').update(refreshToken).digest('hex');
+  hashRefreshToken(token) {
+    return createHash('sha256').update(token).digest('hex');
   }
 
   toUserDto(user) {
-    const permissions = user.role.permissions.map((rp) => rp.permission.value);
-    return {
-      id: user.id,
-      username: user.username,
-      email: user.email,
-      fullName: user.fullName,
-      role: user.role.name,
-      roleId: user.role.id,
-      permissions,
-      status: user.status,
-      isActive: user.isActive,
-      profileImage: user.profileImage,
-      warehouseId: user.warehouseId,
-      lastLogin: user.lastLogin,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-      createdBy: user.createdBy,
-    };
+    const { passwordHash, ...rest } = user;
+    return { ...rest };
   }
 }
-
 export const authService = new AuthService();

@@ -1,5 +1,4 @@
-import { authService } from './auth.service.js';
-import { PERMISSIONS } from '../../shared/types/permissions.js';
+﻿import { authService } from './auth.service.js';
 
 class AuthController {
   login = (req, res, next) => {
@@ -16,17 +15,6 @@ class AuthController {
       .catch(next);
   };
 
-  refresh = (req, res, next) => {
-    authService
-      .refreshToken(req.body.refreshToken)
-      .then((result) => sendSuccess(res, result))
-      .catch(next);
-  };
-
-  logout = (req, res, next) => {
-    authService.logout(req.body.refreshToken).then((result) => sendSuccess(res, result)).catch(next);
-  };
-
   me = (req, res, next) => {
     authService.me(req.user.id).then((result) => sendSuccess(res, result)).catch(next);
   };
@@ -36,13 +24,6 @@ class AuthController {
       .changePassword(req.user.id, req.body.currentPassword, req.body.newPassword)
       .then((result) => sendSuccess(res, result))
       .catch(next);
-  };
-
-  permissions = (_req, res) => {
-    sendSuccess(res, {
-      roles: ['super_admin', 'admin', 'inventory_manager', 'storekeeper', 'procurement_officer', 'sales_officer', 'auditor', 'read_only'],
-      permissions: PERMISSIONS,
-    });
   };
 }
 
