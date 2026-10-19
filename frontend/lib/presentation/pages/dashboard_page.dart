@@ -15,6 +15,11 @@ class DashboardPage extends ConsumerWidget {
     final transactions = stats?.recentTransactions ?? const <RecentTransaction>[];
     final alerts = stats?.lowStockAlerts ?? const <LowStockAlert>[];
     final expiring = stats?.expiringProducts ?? const <ExpiringProduct>[];
+    final totalProducts = stats?.totalProducts ?? 0;
+    final totalStockQuantity = stats?.totalStockQuantity ?? 0;
+    final lowStockItems = stats?.lowStockItems ?? 0;
+    final pendingApprovals = stats?.pendingApprovals ?? 0;
+    final pendingPurchaseOrders = stats?.pendingPurchaseOrders ?? 0;
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -46,15 +51,15 @@ class DashboardPage extends ConsumerWidget {
                     ),
                     StatCard(
                       title: 'Products tracked',
-                      value: _number(stats!.totalProducts.toDouble()),
-                      subtitle: '${_number(stats!.totalStockQuantity.toDouble())} units on hand',
+                      value: _number(totalProducts.toDouble()),
+                      subtitle: '${_number(totalStockQuantity.toDouble())} units on hand',
                       icon: const Icon(Icons.inventory_2_outlined),
                       accentColor: const Color(0xFF7C3AED),
                       onTap: () => context.go('/products'),
                     ),
                     StatCard(
                       title: 'Low stock alerts',
-                      value: _number(stats!.lowStockItems.toDouble()),
+                      value: _number(lowStockItems.toDouble()),
                       subtitle: 'Items need attention',
                       icon: const Icon(Icons.warning_amber_rounded),
                       accentColor: const Color(0xFFD97706),
@@ -62,8 +67,8 @@ class DashboardPage extends ConsumerWidget {
                     ),
                     StatCard(
                       title: 'Pending approvals',
-                      value: _number(stats!.pendingApprovals.toDouble()),
-                      subtitle: '${_number(stats!.pendingPurchaseOrders.toDouble())} purchase orders',
+                      value: _number(pendingApprovals.toDouble()),
+                      subtitle: '${_number(pendingPurchaseOrders.toDouble())} purchase orders',
                       icon: const Icon(Icons.fact_check_outlined),
                       accentColor: const Color(0xFF0891B2),
                       onTap: () => context.go('/purchase-orders'),

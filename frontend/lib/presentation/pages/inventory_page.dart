@@ -32,6 +32,10 @@ class InventoryPage extends ConsumerWidget {
             LayoutBuilder(
               builder: (context, constraints) {
                 final columns = constraints.maxWidth >= 1050 ? 4 : constraints.maxWidth >= 620 ? 2 : 1;
+                final totalProducts = value?.totalProducts ?? 0;
+                final totalStockQuantity = value?.totalStockQuantity ?? 0;
+                final lowStockItems = value?.lowStockItems ?? 0;
+                final totalStockValue = value?.totalStockValue ?? 0;
                 return GridView.count(
                   crossAxisCount: columns,
                   shrinkWrap: true,
@@ -40,10 +44,10 @@ class InventoryPage extends ConsumerWidget {
                   mainAxisSpacing: 12,
                   childAspectRatio: columns == 1 ? 3.2 : 2.15,
                   children: [
-                    StatCard(title: 'Total products', value: _number(value!.totalProducts), subtitle: 'Tracked across locations', icon: const Icon(Icons.inventory_2_outlined), onTap: () => context.go('/products')),
-                    StatCard(title: 'Units on hand', value: _number(value!.totalStockQuantity), subtitle: 'Available and reserved', icon: const Icon(Icons.warehouse_outlined), accentColor: const Color(0xFF7C3AED)),
-                    StatCard(title: 'Low stock', value: _number(value!.lowStockItems.toDouble()), subtitle: 'Below reorder level', icon: const Icon(Icons.warning_amber_rounded), accentColor: const Color(0xFFD97706)),
-                    StatCard(title: 'Stock value', value: _money(value!.totalStockValue), subtitle: 'Current inventory value', icon: const Icon(Icons.account_balance_wallet_outlined), accentColor: const Color(0xFF0891B2)),
+                    StatCard(title: 'Total products', value: _number(totalProducts), subtitle: 'Tracked across locations', icon: const Icon(Icons.inventory_2_outlined), onTap: () => context.go('/products')),
+                    StatCard(title: 'Units on hand', value: _number(totalStockQuantity), subtitle: 'Available and reserved', icon: const Icon(Icons.warehouse_outlined), accentColor: const Color(0xFF7C3AED)),
+                    StatCard(title: 'Low stock', value: _number(lowStockItems.toDouble()), subtitle: 'Below reorder level', icon: const Icon(Icons.warning_amber_rounded), accentColor: const Color(0xFFD97706)),
+                    StatCard(title: 'Stock value', value: _money(totalStockValue), subtitle: 'Current inventory value', icon: const Icon(Icons.account_balance_wallet_outlined), accentColor: const Color(0xFF0891B2)),
                   ],
                 );
               },
