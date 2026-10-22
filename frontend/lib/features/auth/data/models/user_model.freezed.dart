@@ -331,7 +331,7 @@ as String?,
 /// @nodoc
 mixin _$AuthTokens {
 
- String get accessToken; String get refreshToken; DateTime get expiresAt; String get tokenType;
+ String get accessToken; String get refreshToken; DateTime? get expiresAt; String get tokenType;
 /// Create a copy of AuthTokens
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -369,7 +369,7 @@ abstract mixin class $AuthTokensCopyWith<$Res>  {
   factory $AuthTokensCopyWith(AuthTokens value, $Res Function(AuthTokens) _then) = _$AuthTokensCopyWithImpl;
 @useResult
 $Res call({
- String accessToken, String refreshToken, DateTime expiresAt, String tokenType
+ String accessToken, String refreshToken, DateTime? expiresAt, String tokenType
 });
 
 
@@ -386,12 +386,12 @@ class _$AuthTokensCopyWithImpl<$Res>
 
 /// Create a copy of AuthTokens
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? accessToken = null,Object? refreshToken = null,Object? expiresAt = null,Object? tokenType = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? accessToken = null,Object? refreshToken = null,Object? expiresAt = freezed,Object? tokenType = null,}) {
   return _then(AuthTokens(
 accessToken: null == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
 as String,refreshToken: null == refreshToken ? _self.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
-as String,expiresAt: null == expiresAt ? _self.expiresAt : expiresAt // ignore: cast_nullable_to_non_nullable
-as DateTime,tokenType: null == tokenType ? _self.tokenType : tokenType // ignore: cast_nullable_to_non_nullable
+as String,expiresAt: freezed == expiresAt ? _self.expiresAt : expiresAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,tokenType: null == tokenType ? _self.tokenType : tokenType // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -477,7 +477,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String accessToken,  String refreshToken,  DateTime expiresAt,  String tokenType)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String accessToken,  String refreshToken,  DateTime? expiresAt,  String tokenType)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthTokens() when $default != null:
 return $default(_that.accessToken,_that.refreshToken,_that.expiresAt,_that.tokenType);case _:
@@ -498,7 +498,7 @@ return $default(_that.accessToken,_that.refreshToken,_that.expiresAt,_that.token
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String accessToken,  String refreshToken,  DateTime expiresAt,  String tokenType)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String accessToken,  String refreshToken,  DateTime? expiresAt,  String tokenType)  $default,) {final _that = this;
 switch (_that) {
 case _AuthTokens():
 return $default(_that.accessToken,_that.refreshToken,_that.expiresAt,_that.tokenType);case _:
@@ -518,7 +518,7 @@ return $default(_that.accessToken,_that.refreshToken,_that.expiresAt,_that.token
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String accessToken,  String refreshToken,  DateTime expiresAt,  String tokenType)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String accessToken,  String refreshToken,  DateTime? expiresAt,  String tokenType)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthTokens() when $default != null:
 return $default(_that.accessToken,_that.refreshToken,_that.expiresAt,_that.tokenType);case _:
@@ -533,13 +533,13 @@ return $default(_that.accessToken,_that.refreshToken,_that.expiresAt,_that.token
 @JsonSerializable()
 
 class _AuthTokens implements AuthTokens {
-  const _AuthTokens({required this.accessToken, required this.refreshToken, required this.expiresAt, required this.tokenType});
+  const _AuthTokens({required this.accessToken, required this.refreshToken, this.expiresAt, this.tokenType = 'Bearer'});
   factory _AuthTokens.fromJson(Map<String, dynamic> json) => _$AuthTokensFromJson(json);
 
 @override final  String accessToken;
 @override final  String refreshToken;
-@override final  DateTime expiresAt;
-@override final  String tokenType;
+@override final  DateTime? expiresAt;
+@override@JsonKey() final  String tokenType;
 
 /// Create a copy of AuthTokens
 /// with the given fields replaced by the non-null parameter values.
@@ -576,7 +576,7 @@ abstract mixin class _$AuthTokensCopyWith<$Res> implements $AuthTokensCopyWith<$
   factory _$AuthTokensCopyWith(_AuthTokens value, $Res Function(_AuthTokens) _then) = __$AuthTokensCopyWithImpl;
 @override @useResult
 $Res call({
- String accessToken, String refreshToken, DateTime expiresAt, String tokenType
+ String accessToken, String refreshToken, DateTime? expiresAt, String tokenType
 });
 
 
@@ -593,12 +593,12 @@ class __$AuthTokensCopyWithImpl<$Res>
 
 /// Create a copy of AuthTokens
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? accessToken = null,Object? refreshToken = null,Object? expiresAt = null,Object? tokenType = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? accessToken = null,Object? refreshToken = null,Object? expiresAt = freezed,Object? tokenType = null,}) {
   return _then(_AuthTokens(
 accessToken: null == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
 as String,refreshToken: null == refreshToken ? _self.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
-as String,expiresAt: null == expiresAt ? _self.expiresAt : expiresAt // ignore: cast_nullable_to_non_nullable
-as DateTime,tokenType: null == tokenType ? _self.tokenType : tokenType // ignore: cast_nullable_to_non_nullable
+as String,expiresAt: freezed == expiresAt ? _self.expiresAt : expiresAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,tokenType: null == tokenType ? _self.tokenType : tokenType // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

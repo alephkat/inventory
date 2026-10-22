@@ -19,28 +19,6 @@ model User {
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
   transactions Transaction[]
-  sessions     UserSession[]
-}
-
-model UserSession {
-  id          String   @id @default(uuid())
-  userId      String
-  refreshToken String
-  expiresAt   DateTime
-  createdAt   DateTime @default(now())
-  user        User     @relation(fields: [userId], references: [id])
-}
-
-model AuditLog {
-  id         String   @id @default(uuid())
-  userId     String?
-  action     String
-  resourceType String
-  resourceId String
-  details    String?
-  ipAddress  String?
-  userAgent  String?
-  createdAt  DateTime @default(now())
 }
 
 model Category {

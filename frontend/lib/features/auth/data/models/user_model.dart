@@ -120,8 +120,8 @@ abstract class AuthTokens with _$AuthTokens {
   const factory AuthTokens({
     required String accessToken,
     required String refreshToken,
-    required DateTime expiresAt,
-    required String tokenType,
+    DateTime? expiresAt,
+    @Default('Bearer') String tokenType,
   }) = _AuthTokens;
 
   factory AuthTokens.fromJson(Map<String, dynamic> json) => _$AuthTokensFromJson(json);

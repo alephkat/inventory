@@ -45,15 +45,17 @@ Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
 _AuthTokens _$AuthTokensFromJson(Map<String, dynamic> json) => _AuthTokens(
   accessToken: json['accessToken'] as String,
   refreshToken: json['refreshToken'] as String,
-  expiresAt: DateTime.parse(json['expiresAt'] as String),
-  tokenType: json['tokenType'] as String,
+  expiresAt: json['expiresAt'] == null
+      ? null
+      : DateTime.parse(json['expiresAt'] as String),
+  tokenType: json['tokenType'] as String? ?? 'Bearer',
 );
 
 Map<String, dynamic> _$AuthTokensToJson(_AuthTokens instance) =>
     <String, dynamic>{
       'accessToken': instance.accessToken,
       'refreshToken': instance.refreshToken,
-      'expiresAt': instance.expiresAt.toIso8601String(),
+      'expiresAt': instance.expiresAt?.toIso8601String(),
       'tokenType': instance.tokenType,
     };
 
