@@ -25,7 +25,7 @@ import 'package:inventory_app/features/notification/data/repositories/notificati
 
 /// Singleton Dio client with auth + error interceptors.
 final apiClientProvider = Provider<ApiClient>((ref) {
-  return ApiClient(SecureTokenStore());
+  return ApiClient();
 });
 
 /// Network connectivity helper.

@@ -1,56 +1,40 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const _kAccessToken = 'access_token';
-const _kRefreshToken = 'refresh_token';
-const _kTokenExpiry = 'token_expiry';
-const _kUserId = 'user_id';
-const _kRole = 'user_role';
+const _kUser = 'user';
 
-/// Secure credential store for JWTs and lightweight session metadata.
-/// Sensitive tokens NEVER touch SharedPreferences; flutter_secure_storage
-/// writes to the iOS Keychain / Android Keystore.
-class SecureTokenStore {
-  final FlutterSecureStorage _storage = const FlutterSecureStorage();
+/// Simple credential store using SharedPreferences.
+class TokenStore {
+  static SharedPreferences? _prefs;
 
-  Future<void> writeTokens({
-    required String accessToken,
-    required String refreshToken,
-    required DateTime expiresAt,
-  }) async {
-    await _storage.write(key: _kAccessToken, value: accessToken);
-    await _storage.write(key: _kRefreshToken, value: refreshToken);
-    await _storage.write(key: _kTokenExpiry, value: expiresAt.toIso8601String());
+  static Future<SharedPreferences> get _instance async {
+    _prefs ??= await SharedPreferences.getInstance();
+    return _prefs!;
   }
 
-  Future<String?> readAccessToken() => _storage.read(key: _kAccessToken);
-  Future<String?> readRefreshToken() => _storage.read(key: _kRefreshToken);
-
-  Future<DateTime?> readTokenExpiry() async {
-    final raw = await _storage.read(key: _kTokenExpiry);
-    return raw == null ? null : DateTime.tryParse(raw);
+  static Future<void> saveToken(String token) async {
+    final prefs = await _instance;
+    await prefs.setString(_kAccessToken, token);
   }
 
-  Future<bool> isAccessTokenValid() async {
-    final token = await readAccessToken();
-    if (token == null || token.isEmpty) return false;
-    final expiry = await readTokenExpiry();
-    if (expiry == null) return true; // no expiry recorded => assume valid until 401
-    return DateTime.now().isBefore(expiry);
+  static Future<String?> readToken() async {
+    final prefs = await _instance;
+    return prefs.getString(_kAccessToken);
   }
 
-  Future<void> writeUserSession({ required String userId, required String role }) async {
-    await _storage.write(key: _kUserId, value: userId);
-    await _storage.write(key: _kRole, value: role);
+  static Future<void> saveUser(dynamic user) async {
+    final prefs = await _instance;
+    await prefs.setString(_kUser, user.toString());
   }
 
-  Future<String?> readUserId() => _storage.read(key: _kUserId);
-  Future<String?> readUserRole() => _storage.read(key: _kRole);
+  static Future<String?> readUser() async {
+    final prefs = await _instance;
+    return prefs.getString(_kUser);
+  }
 
-  Future<void> clear() async {
-    await _storage.delete(key: _kAccessToken);
-    await _storage.delete(key: _kRefreshToken);
-    await _storage.delete(key: _kTokenExpiry);
-    await _storage.delete(key: _kUserId);
-    await _storage.delete(key: _kRole);
+  static Future<void> clear() async {
+    final prefs = await _instance;
+    await prefs.remove(_kAccessToken);
+    await prefs.remove(_kUser);
   }
 }
