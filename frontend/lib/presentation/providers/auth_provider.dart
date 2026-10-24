@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:dio/dio.dart';
 import 'package:inventory_app/core/network/api_client.dart';
 import 'package:inventory_app/core/network/token_store.dart';
 import 'package:inventory_app/presentation/providers/network_provider.dart';
@@ -65,10 +66,20 @@ class AuthNotifier extends StateNotifier<AuthState> {
         user: user,
         error: null,
       );
-    } catch (e) {
+    } on DioException catch (e) {
+      final status = e.response?.statusCode;
+      final message = status == 401 || status == 403
+          ? 'Invalid username or password'
+          : status == null ? 'Unable to connect to server' : 'Login failed';
       state = state.copyWith(
         isLoading: false,
-        error: e.toString(),
+        error: message,
+        isAuthenticated: false,
+      );
+    } catch (_) {
+      state = state.copyWith(
+        isLoading: false,
+        error: 'Login failed',
         isAuthenticated: false,
       );
     }
