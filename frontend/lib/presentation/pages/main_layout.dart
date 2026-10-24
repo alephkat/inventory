@@ -95,6 +95,15 @@ class MainLayout extends ConsumerWidget {
                 padding: EdgeInsets.only(top: 12, bottom: 20),
                 child: _BrandMark(),
               ),
+              selectedIconTheme: const IconThemeData(color: Color(0xFF0F4C81)),
+              unselectedIconTheme: const IconThemeData(color: Color(0xFF6B7280)),
+              selectedLabelTextStyle: const TextStyle(
+                color: Color(0xFF0F4C81),
+                fontWeight: FontWeight.bold,
+              ),
+              unselectedLabelTextStyle: const TextStyle(
+                color: Color(0xFF6B7280),
+              ),
               destinations: [
                 for (final item in _items)
                   NavigationRailDestination(
