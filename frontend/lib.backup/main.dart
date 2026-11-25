@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+simport 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:inventory_app/presentation/providers/auth_provider.dart';
 import 'package:inventory_app/presentation/theme/app_theme.dart';

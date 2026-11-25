@@ -1,0 +1,1 @@
+mklink /J C:\java21 "C:\Program Files\Android\Android Studio\jbr"
